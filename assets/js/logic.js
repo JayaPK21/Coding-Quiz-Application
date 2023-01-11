@@ -3,15 +3,20 @@ var timerEl = document.getElementById("time");
 var startButton = document.getElementById("start");
 var startScreen = document.getElementById("start-screen");
 
+var scores = {
+    scoreTotal : 0,
+    timeLeft: 75
+};
+
 function countdown() {
 
     // Initializing the timer for the start of the quiz.
-    var timeLeft = startTime;
+    scores.timeLeft = startTime;
     
     // The `setInterval()` method is used to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
 
-            if(timeLeft === 0) {
+            if(scores.timeLeft <= 0) {
                 // When time is over the interval functions is cleared.
                 clearInterval(timeInterval);
 
@@ -21,8 +26,8 @@ function countdown() {
             }
 
             // At intervals of 1 second the time left is displayed on the screen.
-            timerEl.textContent = timeLeft;
-            timeLeft--;
+            timerEl.textContent = scores.timeLeft;
+            scores.timeLeft--;
         }, 1000);
 }
 
