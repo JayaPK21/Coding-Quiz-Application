@@ -1,6 +1,7 @@
 var startTime = 75;
 var timerEl = document.getElementById("time");
 var startButton = document.getElementById("start");
+var startScreen = document.getElementById("start-screen");
 
 function countdown() {
 
@@ -26,5 +27,8 @@ function countdown() {
 }
 
 startButton.addEventListener("click", function(){
+    startScreen.classList.add("hide");
     countdown();
+    
+    displayQuiz();
 });
