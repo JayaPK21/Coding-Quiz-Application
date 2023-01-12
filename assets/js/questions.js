@@ -2,6 +2,7 @@ var quizScreen = document.getElementById("questions");
 var endScreen = document.getElementById("end-screen");
 var questionEl = document.getElementById("question-title");
 var choicesEl = document.getElementById("choices");
+var finalScoreEl = document.getElementById("final-score");
 
 var button1El = document.createElement("button");
 var button2El = document.createElement("button");
@@ -46,13 +47,14 @@ var quizListIndex = 0;
 function displayQuiz() {
 
     quizScreen.classList.remove("hide");
+    feedbackEl.classList.remove("hide");
     displayQuestion(quizObjList[quizListIndex]);
 }
 
 function displayQuestion(quizObj) {
     var correctAnswer = quizObj.correctAnswer;
-    console.log(JSON.stringify(quizObj));
-    console.log("Correct Answer test: "+correctAnswer);
+    // console.log(JSON.stringify(quizObj));
+    // console.log("Correct Answer test: "+correctAnswer);
     questionEl.textContent = quizObj.question;
 
     for(var i=0; i < buttonList.length; i++) {
@@ -73,15 +75,18 @@ function displayQuestion(quizObj) {
     quizListIndex++;
     choicesEl.addEventListener("click", function(event) {
         event.stopImmediatePropagation();
-        scores.timeLeft = scores.timeLeft - 10;
 
         var currElement = event.target;
         console.log("Data index: "+currElement.dataset.answer);
         // console.log("Correct Answer: "+correctAnswer);
         if(currElement.dataset.answer === "correct"){
             console.log("Correct Answer!");
+            scores.scoreTotal = scores.scoreTotal + 20;
+            feedbackEl.textContent = "Correct!";
         }else{
             console.log("Wrong Answer!");
+            scores.timeLeft = scores.timeLeft - 10;
+            feedbackEl.textContent = "Wrong!";
         }
         if(quizListIndex === quizObjList.length){
             displayEndScreen();
@@ -91,10 +96,4 @@ function displayQuestion(quizObj) {
         // console.log("Total Score: "+scores.scoreTotal);
         displayQuestion(quizObjList[quizListIndex]);
     }); 
-}
-
-function displayEndScreen() {
-    scores.timeLeft = 0;
-    quizScreen.classList.add("hide");
-    endScreen.classList.remove("hide");
 }
