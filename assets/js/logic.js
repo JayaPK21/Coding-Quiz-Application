@@ -52,13 +52,14 @@ startButton.addEventListener("click", function(){
 function displayEndScreen() {
     scores.timeLeft = 0;
     quizScreen.classList.add("hide");
-    feedbackEl.classList.add("hide");
+    feedbackEl.classList.remove("feedback");
     endScreen.classList.remove("hide");
-
+    
     finalScoreEl.textContent = scores.scoreTotal;
 }
 
 submitButton.addEventListener("click", function(){
+
     scoreData.initial = nameInitials.value;
     scoreData.score = scores.scoreTotal;
 
@@ -66,10 +67,6 @@ submitButton.addEventListener("click", function(){
     console.log(scoreData.initial);
 
     window.location.href = "highscores.html";
-
-    // endScreen.classList.add("hide");
-    // feedbackEl.classList.remove("hide");
-    // feedbackEl.textContent = "Thank you for taking the Quiz! You can check how others have performed by going to High Scores page.";
 
 });
 
