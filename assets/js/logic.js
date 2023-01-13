@@ -51,7 +51,11 @@ startButton.addEventListener("click", function(){
 });
 
 function displayEndScreen() {
-    scores.scoreTotal = scores.timeLeft;
+    if(scores.timeLeft < 0) {
+        scores.scoreTotal = 0;
+    } else {
+        scores.scoreTotal = scores.timeLeft;
+    }
 
     quizScreen.classList.add("hide");
     feedbackEl.classList.remove("feedback");
