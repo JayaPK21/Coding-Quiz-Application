@@ -8,7 +8,8 @@ var feedbackEl = document.getElementById("feedback");
 
 var scores = {
     scoreTotal : 0,
-    timeLeft: 75
+    timeLeft: 75,
+    endOfQuiz: false
 };
 
 var scoreData = {
@@ -26,7 +27,7 @@ function countdown() {
     // The `setInterval()` method is used to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
 
-            if(scores.timeLeft <= 0) {
+            if(scores.timeLeft <= 0 || scores.endOfQuiz) {
                 // When time is over the interval functions is cleared.
                 clearInterval(timeInterval);
 
@@ -50,7 +51,8 @@ startButton.addEventListener("click", function(){
 });
 
 function displayEndScreen() {
-    scores.timeLeft = 0;
+    scores.scoreTotal = scores.timeLeft;
+
     quizScreen.classList.add("hide");
     feedbackEl.classList.remove("feedback");
     endScreen.classList.remove("hide");
@@ -64,7 +66,6 @@ submitButton.addEventListener("click", function(){
     scoreData.score = scores.scoreTotal;
 
     storeHighScores();
-    console.log(scoreData.initial);
 
     window.location.href = "highscores.html";
 
@@ -81,5 +82,4 @@ function storeHighScores() {
     initializeHighScores();
     scoreDataLocal.push(scoreData);
     localStorage.setItem("highestScores", JSON.stringify(scoreDataLocal));
-    console.log(scoreDataLocal);
 }

@@ -58,9 +58,6 @@ function displayQuiz() {
 }
 
 function displayQuestion(quizObj) {
-    var correctAnswer = quizObj.correctAnswer;
-    // console.log(JSON.stringify(quizObj));
-    // console.log("Correct Answer test: "+correctAnswer);
     questionEl.textContent = quizObj.question;
 
     for(var i=0; i < buttonList.length; i++) {
@@ -83,27 +80,22 @@ function displayQuestion(quizObj) {
         event.stopImmediatePropagation();
 
         var currElement = event.target;
-        console.log("Data index: "+currElement.dataset.answer);
-        // console.log("Correct Answer: "+correctAnswer);
         if(currElement.dataset.answer === "correct"){
             console.log("Correct Answer!");
-            scores.scoreTotal = scores.scoreTotal + 20;
+            //scores.scoreTotal = scores.scoreTotal + 20;
             correctAnsAudio.play();
             showAnswer("Correct!");
-            // feedbackEl.textContent = "Correct!";
         }else{
             console.log("Wrong Answer!");
             scores.timeLeft = scores.timeLeft - 10;
             wrongAnsAudio.play();
             showAnswer("Wrong!");
-            // feedbackEl.textContent = "Wrong!";
         }
         if(quizListIndex === quizObjList.length){
+            scores.endOfQuiz = true;
             displayEndScreen();
             return;
         }
-        // console.log("quiz index: "+quizListIndex);
-        // console.log("Total Score: "+scores.scoreTotal);
         displayQuestion(quizObjList[quizListIndex]);
     }); 
 }
@@ -112,13 +104,8 @@ function showAnswer(answer) {
     var timeInterval = setInterval(myTimer, 100);
 
     function myTimer() {
-        // if(executedOnce){
-            clearInterval(timeInterval);
-        //}
-        //feedbackEl.classList.add("hide");
+        clearInterval(timeInterval);
         feedbackEl.textContent = "";
-        console.log("inside timer: "+feedbackEl.textContent);
     }
-    console.log("Outside Timer");
     feedbackEl.textContent = answer;
 }
