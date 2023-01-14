@@ -37,3 +37,9 @@ Start the quiz by clicking on the 'Start Quiz' button.
 
 Select the correct option in the quiz. The timer can be seen on the top right corner of the screen.
 ![An image of a sample question and multiple choices to select in the quiz.](assets/screenshots/quiz_appln_quizscreen.png)
+
+At the end of quiz the user can enter their initials to save their score.
+![An image of the screen that is displayed at the end of quiz.](assets/screenshots/quiz_appln_end_screen.png)
+
+This screen shows the scores of all users who have taken the quiz and save their initials with scores. The user has the option of clearing the previous scores.
+![An image of the screen that displays the highest scores of all users taking the quiz.](assets/screenshots/quiz_appln_high_scores.png)
